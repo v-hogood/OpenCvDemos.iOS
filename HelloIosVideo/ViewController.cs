@@ -54,7 +54,7 @@ namespace HelloIosVideo
         public void ProcessImage(Mat image)
         {
             // Do some OpenCV stuff with the image
-            Mat image_copy = new Mat(image.Size(), image.Type);
+            Mat image_copy = new();
             Imgproc.CvtColor(image, image_copy, ColorConversionCodes.Bgra2bgr);
 
             // invert image

@@ -15,4 +15,21 @@
   <ItemGroup>
     <PackageReference Include="OpenCvSdk.iOS" Version="4.8.0" />
   </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Update="Media.xcassets\AppIcon.appiconset\Icon-29%402x.png">
+      <Link>Media.xcassets\AppIcon.appiconset\Icon-29%402x.png</Link>
+    </ImageAsset>
+    <ImageAsset Update="Media.xcassets\AppIcon.appiconset\Icon-Small-50%402x.png">
+      <Link>Media.xcassets\AppIcon.appiconset\Icon-Small-50%402x.png</Link>
+    </ImageAsset>
+    <ImageAsset Update="Media.xcassets\AppIcon.appiconset\Icon-72%402x.png">
+      <Link>Media.xcassets\AppIcon.appiconset\Icon-72%402x.png</Link>
+    </ImageAsset>
+    <ImageAsset Update="Media.xcassets\AppIcon.appiconset\Icon%402x.png">
+      <Link>Media.xcassets\AppIcon.appiconset\Icon%402x.png</Link>
+    </ImageAsset>
+    <ImageAsset Update="Media.xcassets\AppIcon.appiconset\Icon-Small%402x.png">
+      <Link>Media.xcassets\AppIcon.appiconset\Icon-Small%402x.png</Link>
+    </ImageAsset>
+  </ItemGroup>
 </Project>
