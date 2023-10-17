@@ -1,4 +1,4 @@
-﻿namespace GrabCut
+﻿namespace FindHomography
 {
     public class Application
     {
