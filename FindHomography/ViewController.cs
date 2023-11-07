@@ -7,7 +7,6 @@ namespace FindHomography;
 
 public partial class ViewController : UIViewController,
     ICvVideoCameraDelegate2,
-    IUIImagePickerControllerDelegate,
     IUINavigationControllerDelegate,
     IUIActionSheetDelegate
 {
@@ -18,8 +17,6 @@ public partial class ViewController : UIViewController,
     CvHomographyController homographyController;
 
     bool enableProcessing;
-
-    UIImagePickerController imagePicker;
 
     UIActionSheet actionSheetDetectors;
     UIActionSheet actionSheetDescriptors;
@@ -214,28 +211,6 @@ public partial class ViewController : UIViewController,
 		}
 	}
 
-    [Export("showCameraImage:")]
-    void ShowCameraImage(UIButton sender)
-    {
-        this.imagePicker = new();
-        this.imagePicker.Delegate = this;
-        this.imagePicker.SourceType = UIImagePickerControllerSourceType.Camera;
-#pragma warning disable CA1422
-        this.PresentModalViewController(imagePicker, true);
-#pragma warning restore CA1422
-    }
-
-    [Export("showPhotoLibrary:")]
-    void ShowPhotoLibrary(UIButton sender)
-    {
-        this.imagePicker = new();
-        this.imagePicker.Delegate = this;
-#pragma warning disable CA1422
-        this.imagePicker.SourceType = UIImagePickerControllerSourceType.PhotoLibrary;
-        this.PresentModalViewController(imagePicker, true);
-#pragma warning restore CA1422
-    }
-
     [Export("showVideoCamera:")]
     void ShowVideoCamera(UIBarButtonItem button)
     {
@@ -311,42 +286,6 @@ public partial class ViewController : UIViewController,
             this.homographyController.Match();
             this.homographyController.DrawScene();
             Console.WriteLine("done.");
-        
 		}
 	}
-
-    [Export("imagePickerController:didFinishPickingMediaWithInfo:")]
-    void DidFinishPickingMedia(UIImagePickerController picker, NSDictionary info)
-    {
-        UIImage image = (UIImage)info.ObjectForKey(UIImagePickerController.OriginalImage);
-        CGSize desiredSize;
-        if (image.Size.Width > image.Size.Height)
-        {
-            desiredSize = new CGSize(352, 288);
-        }
-        else
-        {
-            desiredSize = new CGSize(288, 352);
-        }
-        image = image.Scale(desiredSize);
-        Console.WriteLine("imagePickerController didFinish: image info [w,h] = [{0},{1}]", image.Size.Width, image.Size.Height);
-
-        this.homographyController.Reset();
-        this.homographyController.SetObjectImage(image);
-        this.imageViewObject.Image = this.homographyController.ObjectImage;
-
-        // this.homographyController.Match();
-        // this.homographyController.DrawMatches();
-        // this.imageView.Image = this.homographyController.MatchImage.ToUIImage();
-
-        picker.DismissViewController(true, null);
-
-        this.UpdateView();
-    }
-
-    [Export("imagePickerControllerDidCancel:")]
-    void ImagePickerControllerDidCancel(UIImagePickerController picker)
-    {
-        picker.DismissViewController(true, null);
-    }
 }
