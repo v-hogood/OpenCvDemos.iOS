@@ -23,7 +23,7 @@ namespace VideoConvolution
         ICvVideoCameraDelegate2
     {
         // keep these two arrays in sync
-        NSString[] actionSheetBlurTitles = { (NSString)"Homogeneous", (NSString)"Gaussian", (NSString)"Median", (NSString)"Bilateral" };
+        string[] actionSheetBlurTitles = { "Homogeneous", "Gaussian", "Median", "Bilateral" };
         OpenCvFilterMode[] actionSheetBlurModes =
         {
             OpenCvFilterMode.FiltermodeBlurHomogeneous,
@@ -33,7 +33,7 @@ namespace VideoConvolution
         };
 
         // keep these two arrays in sync, don't forget the final nil
-        NSString[] actionSheetEdgeTitles = { (NSString)"Laplacian", (NSString)"Sobel", (NSString)"Canny" };
+        string[] actionSheetEdgeTitles = { "Laplacian", "Sobel", "Canny" };
         OpenCvFilterMode[] actionSheetEdgeModes =
         {
             OpenCvFilterMode.FiltermodeLaplacian,
@@ -92,13 +92,13 @@ namespace VideoConvolution
 
 #pragma warning disable CA1422
             this.actionSheetBlurFilters = new UIActionSheet(title:"Blur Filters", this, cancelTitle:"Cancel", destroy:null, other:null);
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < actionSheetBlurTitles.Length; i++)
             {
                 this.actionSheetBlurFilters.AddButton(title:actionSheetBlurTitles[i]);
             }
 
             this.actionSheetEdgeFilters = new UIActionSheet(title:"Edge Filters", this, cancelTitle:"Cancel", destroy:null, other:null);
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < actionSheetEdgeTitles.Length; i++)
             {
                 this.actionSheetEdgeFilters.AddButton(title:actionSheetEdgeTitles[i]);
             }
