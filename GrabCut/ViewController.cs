@@ -220,7 +220,7 @@ namespace GrabCut
                 return;
     
             CGPoint tapPoint = sender.LocationInView(sender.View.Superview);
-            Console.WriteLine("tap ({0},{1])", tapPoint.X, tapPoint.Y);
+            Console.WriteLine("tap ({0},{1})", tapPoint.X, tapPoint.Y);
             Console.WriteLine("->  ({0},{1})", tapPoint.X * scale_x, tapPoint.Y * scale_y);
             tapPoint = new CGPoint(tapPoint.X * scale_x, tapPoint.Y * scale_y);
 
