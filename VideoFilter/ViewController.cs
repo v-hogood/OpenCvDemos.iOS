@@ -1,5 +1,5 @@
 ﻿using AVFoundation;
-using MediaPlayer;
+using AVKit;
 using ObjCRuntime;
 using OpenCvSdk;
 
@@ -51,8 +51,9 @@ namespace VideoFilter
 
             this.videoCamera.RecordVideo = true;
 
-            startOrientation = this.InterfaceOrientation;
-            switch (this.InterfaceOrientation)
+            var ws = UIApplication.SharedApplication.ConnectedScenes.AnyObject as UIWindowScene;
+            startOrientation = ws.Windows.First().WindowScene.EffectiveGeometry.InterfaceOrientation;
+            switch (startOrientation)
             {
                 case UIInterfaceOrientation.LandscapeLeft:
                 default:
@@ -96,63 +97,63 @@ namespace VideoFilter
         public void ActionSepia(UIBarButtonItem button)
         {
             enableSepia = !enableSepia;
-            button.Style = (enableSepia) ? UIBarButtonItemStyle.Done : UIBarButtonItemStyle.Bordered;
+            button.Style = (enableSepia) ? UIBarButtonItemStyle.Done : UIBarButtonItemStyle.Plain;
         }
 
         [Export("actionInvert:")]
         public void ActionInvert(UIBarButtonItem button)
         {
             enableInvert = !enableInvert;
-            button.Style = (enableInvert) ? UIBarButtonItemStyle.Done : UIBarButtonItemStyle.Bordered;
+            button.Style = (enableInvert) ? UIBarButtonItemStyle.Done : UIBarButtonItemStyle.Plain;
         }
 
         [Export("actionRetro:")]
         public void ActionRetro(UIBarButtonItem button)
         {
             enableRetro = !enableRetro;
-            button.Style = (enableRetro) ? UIBarButtonItemStyle.Done : UIBarButtonItemStyle.Bordered;
+            button.Style = (enableRetro) ? UIBarButtonItemStyle.Done : UIBarButtonItemStyle.Plain;
         }
 
         [Export("actionSoftFocus:")]
         public void ActionSoftFocus(UIBarButtonItem button)
         {
             enableSoftFocus = !enableSoftFocus;
-            button.Style = (enableSoftFocus) ? UIBarButtonItemStyle.Done : UIBarButtonItemStyle.Bordered;
+            button.Style = (enableSoftFocus) ? UIBarButtonItemStyle.Done : UIBarButtonItemStyle.Plain;
         }
 
         [Export("actionCartoon:")]
         public void ActionCartoon(UIBarButtonItem button)
         {
             enableCartoon = !enableCartoon;
-            button.Style = (enableCartoon) ? UIBarButtonItemStyle.Done : UIBarButtonItemStyle.Bordered;
+            button.Style = (enableCartoon) ? UIBarButtonItemStyle.Done : UIBarButtonItemStyle.Plain;
         }
 
         [Export("actionFilmGrain:")]
         public void ActionFilmGrain(UIBarButtonItem button)
         {
             enableFilmGrain = !enableFilmGrain;
-            button.Style = (enableFilmGrain) ? UIBarButtonItemStyle.Done : UIBarButtonItemStyle.Bordered;
+            button.Style = (enableFilmGrain) ? UIBarButtonItemStyle.Done : UIBarButtonItemStyle.Plain;
         }
 
         [Export("actionGray:")]
         public void ActionGray(UIBarButtonItem button)
         {
             enableGray = !enableGray;
-            button.Style = (enableGray) ? UIBarButtonItemStyle.Done : UIBarButtonItemStyle.Bordered;
+            button.Style = (enableGray) ? UIBarButtonItemStyle.Done : UIBarButtonItemStyle.Plain;
         }
 
         [Export("actionYuv:")]
         public void ActionYuv(UIBarButtonItem button)
         {
             enableYuv = !enableYuv;
-            button.Style = (enableYuv) ? UIBarButtonItemStyle.Done : UIBarButtonItemStyle.Bordered;
+            button.Style = (enableYuv) ? UIBarButtonItemStyle.Done : UIBarButtonItemStyle.Plain;
         }
 
         [Export("actionBinary:")]
         public void ActionBinary(UIBarButtonItem button)
         {
             enableBinary = !enableBinary;
-            button.Style = (enableBinary) ? UIBarButtonItemStyle.Done : UIBarButtonItemStyle.Bordered;
+            button.Style = (enableBinary) ? UIBarButtonItemStyle.Done : UIBarButtonItemStyle.Plain;
         }
 
         [Export("actionEnableProcessing:")]
@@ -184,7 +185,9 @@ namespace VideoFilter
 
             this.videoCamera.SaveVideo();
 
-            this.PresentMoviePlayerViewController(new MPMoviePlayerViewController(url:this.videoCamera.VideoFileURL));
+            var avpvc = new AVPlayerViewController();
+            avpvc.Player = new AVPlayer(URL:this.videoCamera.VideoFileURL);
+            this.PresentViewController(avpvc, true, () => avpvc.Player.Play());
         }
 
         // delegate method for processing image frames

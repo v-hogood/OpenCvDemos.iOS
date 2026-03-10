@@ -7,8 +7,6 @@ public class CvFaceDetector
     CascadeClassifier eyes_cascade = null;
     CascadeClassifier face_cascade = null;
 
-    bool detectEyes = true;
-
     public CvFaceDetector()
 	{
 		this.LoadCascades();

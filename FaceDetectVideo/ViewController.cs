@@ -10,8 +10,6 @@ public partial class ViewController : UIViewController,
 
     CvVideoCamera2 videoCamera;
 
-	UISlider sliderFPS;
-
 	bool enableProcessing;
 
 	CvFaceDetector cvFaceDetector;

@@ -86,7 +86,10 @@ public partial class ViewControllerLoadObject : UIViewController,
         {
             desiredSize = new CGSize(288, 352);
         }
-        image = image.Scale(desiredSize);
+        var gir = new UIGraphicsImageRenderer(size: desiredSize);
+        image = gir.CreateImage((_) =>
+            image.Draw(new CGRect(CGPoint.Empty, desiredSize)));
+
         Console.WriteLine("imagePickerController didFinish: image info [w,h] = [{0},{1}]", image.Size.Width, image.Size.Height);
 
         this.homographyController.Reset();
