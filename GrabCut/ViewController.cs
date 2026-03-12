@@ -112,7 +112,7 @@ namespace GrabCut
         }
 
         [Export("actionShowPhotoLibrary:")]
-        public void ShowPhotoLibrary(UIButton sender)
+        public void ShowPhotoLibrary(UIBarButtonItem sender)
         {
 #pragma warning disable CA1422
             this.PresentModalViewController(this.imagePicker, animated:true);
@@ -120,14 +120,14 @@ namespace GrabCut
         }
 
         [Export("actionEdit:")]
-        public void Edit(UIButton sender)
+        public void Edit(UIBarButtonItem sender)
         {
             this.Editing = !this.Editing;
             this.UpdateView();
         }
 
         [Export("actionSave:")]
-        public void Save(UIButton sender)
+        public void Save(UIBarButtonItem sender)
         {
             if (image_changed)
             {
@@ -138,7 +138,7 @@ namespace GrabCut
         }
 
         [Export("actionToggle:")]
-        public void Toggle(UIButton sender)
+        public void Toggle(UIBarButtonItem sender)
         {
             edit_fg = !edit_fg;
             if (edit_fg)
@@ -152,7 +152,7 @@ namespace GrabCut
         }
 
         [Export("actionGrabCut:")]
-        public void GrabCut(UIButton sender)
+        public void GrabCut(UIBarButtonItem sender)
         {
             this.IndicateActivity(true);
 
@@ -160,7 +160,7 @@ namespace GrabCut
         }
 
         [Export("actionGrabCutIteration:")]
-        public void GrabCutIteration(UIButton sender)
+        public void GrabCutIteration(UIBarButtonItem sender)
         {
             DispatchQueue.GetGlobalQueue(DispatchQueuePriority.Default).DispatchAsync(() =>
             {
@@ -170,7 +170,7 @@ namespace GrabCut
         }
 
         [Export("grabCutDone:")]
-        public void GrabCutDone(UIButton sender)
+        public void GrabCutDone(UIBarButtonItem sender)
         {
             label.Text = "Iteration " + grabCutController.IterCount;
 

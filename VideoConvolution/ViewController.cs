@@ -163,7 +163,7 @@ namespace VideoConvolution
         }
 
         [Export("showPhotoLibrary:")]
-        public void ShowPhotoLibrary(UIButton sender)
+        public void ShowPhotoLibrary(UIBarButtonItem sender)
         {
             Console.WriteLine("show photo library");
 
@@ -176,7 +176,7 @@ namespace VideoConvolution
         }
 
         [Export("sliderValueChanged:")]
-        public void SliderValueChanged(UIButton sender)
+        public void SliderValueChanged(UISlider sender)
         {
             int new_value;
             switch (mode)
@@ -209,7 +209,7 @@ namespace VideoConvolution
         }
 
         [Export("switchProcessingOnOff:")]
-        public void SwitchProcessingOnOff(UIButton sender)
+        public void SwitchProcessingOnOff(UISwitch sender)
         {
             enableProcessing = !enableProcessing;
 
@@ -231,13 +231,13 @@ namespace VideoConvolution
 
         [Export("showBlurFilters:")]
 #pragma warning disable CA1422
-        public void ShowBlurFilters(UIButton sender)
+        public void ShowBlurFilters(UIBarButtonItem sender)
         {
             this.actionSheetBlurFilters.ShowInView(this.View);
         }
 
         [Export("showEdgeFilters:")]
-        public void ShowEdgeFilters(UIButton sender)
+        public void ShowEdgeFilters(UIBarButtonItem sender)
         {
             this.actionSheetEdgeFilters.ShowInView(this.View);
         }

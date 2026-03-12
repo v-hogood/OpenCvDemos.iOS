@@ -86,7 +86,7 @@ public partial class ViewController : UIViewController,
 	}
 
 	[Export("switchProcessingOnOff:")]
-	void SwitchProcessingOnOff(UIButton sender)
+	void SwitchProcessingOnOff(UISwitch sender)
 	{
 		enableProcessing = !enableProcessing;
 		if (enableProcessing)
@@ -100,13 +100,13 @@ public partial class ViewController : UIViewController,
 	}
 
 	[Export("switchCamera:")]
-	public void SwitchCamera(UIButton sender)
+	public void SwitchCamera(UIBarButtonItem sender)
 	{
 		this.videoCamera.SwitchCameras();
 	}
 
 	[Export("showCameraImage:")]
-	void ShowCameraImage(UIButton sender)
+	void ShowCameraImage(UIBarButtonItem sender)
 	{
 		this.imagePicker = new();
 		this.imagePicker.Delegate = this;
@@ -117,7 +117,7 @@ public partial class ViewController : UIViewController,
 	}
 
 	[Export("showPhotoLibrary:")]
-	void ShowPhotoLibrary(UIButton sender)
+	void ShowPhotoLibrary(UIBarButtonItem sender)
 	{
 		this.imagePicker = new();
 		this.imagePicker.AllowsEditing = true;

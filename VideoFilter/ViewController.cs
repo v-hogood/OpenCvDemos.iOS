@@ -232,7 +232,7 @@ namespace VideoFilter
         }
 
         [Export("showPhotoLibrary:")]
-        public void ShowPhotoLibrary(UIButton sender)
+        public void ShowPhotoLibrary(UIBarButtonItem sender)
         {
             Console.WriteLine("show photo library");
 

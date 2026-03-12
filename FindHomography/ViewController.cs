@@ -230,13 +230,13 @@ public partial class ViewController : UIViewController,
 
 #pragma warning disable CA1422
     [Export("showDetectors:")]
-    void ShowDetectors(UIButton button)
+    void ShowDetectors(UIBarButtonItem button)
 	{
         this.actionSheetDetectors.ShowInView(this.View);
     }
 
     [Export("showDescriptors:")]
-    void ShowDescriptors(UIButton button)
+    void ShowDescriptors(UIBarButtonItem button)
     {
         this.actionSheetDescriptors.ShowInView(this.View);
     }
