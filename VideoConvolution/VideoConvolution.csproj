@@ -4,10 +4,10 @@
     <OutputType>Exe</OutputType>
     <Nullable>disable</Nullable>
     <ImplicitUsings>true</ImplicitUsings>
-    <SupportedOSPlatformVersion>13.0</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion>15.0</SupportedOSPlatformVersion>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="OpenCvSdk.iOS" Version="4.14.0" />
+    <PackageReference Include="OpenCvSdk.iOS" Version="5.0.0" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="..\Media.xcassets\AppIcon.appiconset\**" />

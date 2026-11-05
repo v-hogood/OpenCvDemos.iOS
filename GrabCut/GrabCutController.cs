@@ -63,7 +63,7 @@ namespace GrabCut
         public Mat GetBinMask(Mat comMask)
         {
             if (comMask.Empty || comMask.Type != CvType.Cv8uc1)
-                Console.WriteLine(Code.StsBadArg + " comMask is empty or has incorrect type (not CV_8UC1)");
+                Console.WriteLine("Error.StsBadArg + comMask is empty or has incorrect type (not CV_8UC1)");
             Mat binMask = new(comMask.Size(), CvType.Cv8uc1);
             binMask.SetToScalar(Scalar.All(1));
             Core.Bitwise_and(comMask, binMask, binMask);

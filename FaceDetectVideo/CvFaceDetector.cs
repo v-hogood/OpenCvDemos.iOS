@@ -4,49 +4,51 @@ namespace FaceDetectVideo;
 
 public class CvFaceDetector
 {
-    CascadeClassifier eyes_cascade = null;
-    CascadeClassifier face_cascade = null;
+	FaceDetectorYN face_detector = null;
 
-    public CvFaceDetector()
+	public CvFaceDetector()
 	{
-		this.LoadCascades();
+		this.LoadDetector();
 	}
 
-	void LoadCascades()
+	void LoadDetector()
 	{
-		face_cascade = this.LoadCascade("lbpcascade_frontalface");
-		eyes_cascade = this.LoadCascade("haarcascade_eye");
+		face_detector = this.LoadDetector("face_detection_yunet_2023mar");
 	}
 
-	CascadeClassifier LoadCascade(string filename)
+	FaceDetectorYN LoadDetector(string filename)
 	{
-		string real_path = NSBundle.MainBundle.PathForResource(name: filename, ofType:"xml");
-		CascadeClassifier cascade = new CascadeClassifier();
+		string real_path = NSBundle.MainBundle.PathForResource(name: filename, ofType:"onnx");
+		FaceDetectorYN detector = FaceDetectorYN.Create(real_path, "", new Size2i(320, 320));
 	
-		if (real_path != null && !cascade.Load(real_path))
+		if (real_path != null && detector == null)
 		{
-			Console.WriteLine("Unable to load cascade file {0}.xml", filename);
+			Console.WriteLine("Unable to load onnx file {0}.xml", filename);
 		}
 		else
 		{
-            Console.WriteLine("Loaded cascade file {0}.xml", filename);
+			Console.WriteLine("Loaded onnx file {0}.xml", filename);
 		}
-		return cascade;
+		return detector;
 	}
 
 	public void DetectFacesInMat(Mat grayMat)
 	{
-		// haar detect
-		float haar_scale = 1.15f;
-		int haar_minNeighbors = 3;
-		int haar_flags = 0 | Objdetect.CASCADE_SCALE_IMAGE | Objdetect.CASCADE_DO_CANNY_PRUNING;
-		Size2i haar_minSize = new(60, 60);
+		Mat face_array = new();
+		face_detector.SetInputSize(grayMat.Size());
+		face_detector.Detect(grayMat, face_array);
+        Rect2i[] faces = new Rect2i[face_array.Rows];
 
-		NSMutableArray<Rect2i> face_array = new();
-		face_cascade.DetectMultiScale(grayMat, face_array, haar_scale,
-									  haar_minNeighbors, haar_flags, haar_minSize );
-		Rect2i[] faces = face_array.ToArray<Rect2i>();
-	
+        for (int i = 0; i < face_array.Rows; i++)
+        {
+            var face = new Rect2i(
+                x: (int)face_array.Get(i, 0)[0],
+                y: (int)face_array.Get(i, 1)[0],
+                width: (int)face_array.Get(i, 2)[0],
+                height: (int)face_array.Get(i, 3)[0]);
+            faces[i] = face;
+        }
+
 		for (int i = 0; i < faces.Length; i++)
 		{
 			Point2i center = new(faces[i].X + faces[i].Width / 2, faces[i].Y + faces[i].Height / 2);

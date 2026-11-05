@@ -518,9 +518,9 @@ public class CvHomographyController : NSObject
 	
 		img_matches = new Mat();
 		
-		Features2d.DrawMatches(img_object, keypoints_object, img_scene, keypoints_scene,
-							   good_matches, img_matches, Scalar.All(-1), Scalar.All(-1),
-							   new(), DrawMatchesFlags.Default);
+		Features.DrawMatches(img_object, keypoints_object, img_scene, keypoints_scene,
+							 good_matches, img_matches, Scalar.All(-1), Scalar.All(-1),
+							 new(), DrawMatchesFlags.Default);
 		Console.WriteLine("draw matches image [w,h] = [{0},{1}]", img_matches.Cols, img_matches.Rows);
 
 		if (good_matches.Length == 0)
@@ -539,7 +539,7 @@ public class CvHomographyController : NSObject
 	
 		try
 		{
-			Mat H = Calib3d.FindHomography(new MatOfPoint2f(obj), new MatOfPoint2f(scene), Calib3d.RANSAC);
+			Mat H = Geometry.FindHomography(new MatOfPoint2f(obj), new MatOfPoint2f(scene), Geometry.RANSAC);
 		
 			// -- Get the corners from the image_1 (the object to be "detected")
 			Point2f[] obj_corners = new Point2f[4];
@@ -594,7 +594,7 @@ public class CvHomographyController : NSObject
 		Console.WriteLine("{0} good matches", good_matches.Length);
 	
 		img_matches = new Mat();
-		Features2d.DrawKeypoints(img_object, keypoints_object, img_matches, Scalar.All(-1), DrawMatchesFlags.Default);
+		Features.DrawKeypoints(img_object, keypoints_object, img_matches, Scalar.All(-1), DrawMatchesFlags.Default);
 	
 		// -- Localize the object
 		Point2f[] obj = new Point2f[0];
@@ -623,7 +623,7 @@ public class CvHomographyController : NSObject
 		}
 		Console.WriteLine("{0} good matches", good_matches.Length);
 	
-		Features2d.DrawKeypoints(img_scene, keypoints_scene, img_scene, Scalar.All(-1), DrawMatchesFlags.DrawOverOutimg);
+		Features.DrawKeypoints(img_scene, keypoints_scene, img_scene, Scalar.All(-1), DrawMatchesFlags.DrawOverOutimg);
 
 		if (good_matches.Length == 0)
 			return;
@@ -641,7 +641,7 @@ public class CvHomographyController : NSObject
 	
 		try
 		{
-			Mat H = Calib3d.FindHomography(new MatOfPoint2f(obj), new MatOfPoint2f(scene), Calib3d.RANSAC);
+			Mat H = Geometry.FindHomography(new MatOfPoint2f(obj), new MatOfPoint2f(scene), Geometry.RANSAC);
 		
 			// -- Get the corners from the image_1 (the object to be "detected")
 			Point2f[] obj_corners = new Point2f[4];
