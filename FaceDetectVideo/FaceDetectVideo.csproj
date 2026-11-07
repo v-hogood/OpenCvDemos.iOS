@@ -7,7 +7,7 @@
     <SupportedOSPlatformVersion>15.0</SupportedOSPlatformVersion>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="OpenCvSdk.iOS" Version="5.0.0" />
+    <PackageReference Include="OpenCvSdk.iOS" Version="5.1.0" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="..\Media.xcassets\AppIcon.appiconset\**" />
